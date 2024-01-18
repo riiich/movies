@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: ${MONGO_DATABASE_NAME}
+      uri: ${CONNECTION_STRING}?retryWrites=true&w=majority
