@@ -7,7 +7,7 @@ export const ReviewForm = ({ handleSubmit, reviewText, labelText, defaultVal }) 
 		<Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextArea1">
                 <Form.Label>{labelText}</Form.Label>
-                <Form.Control ref={reviewText} as="textarea" rows={3} defaultValue={defaultVal} />
+                <Form.Control ref={reviewText} as="textarea" rows={3} defaultValue={defaultVal} placeholder="Write your post..." />
             </Form.Group>
             <Button variant="outline-info" onClick={handleSubmit}>Submit</Button>
         </Form>

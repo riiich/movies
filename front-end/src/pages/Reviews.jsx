@@ -16,13 +16,20 @@ export const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
 
 		try {
 			const res = await axios.post("http://localhost:8080/api/v1/movie-reviews", {
-                imdbId: movieId,
+				imdbId: movieId,
 				review: rev.value,
 			});
 
-            const updatedReviews = [...reviews, { body: rev.value }];
+			if (rev.value.length < 1) {
+				console.log("Review is empty!");
+				return;
+			}
+
+			const updatedReviews = [...reviews, { body: rev.value }];
 			setReviews(updatedReviews);
-			rev.value = "";     // after submitting a review, clear the review
+			console.log(reviews);
+			console.log(updatedReviews);
+			rev.value = ""; // after submitting a review, clear the review
 		} catch (err) {
 			console.log(err);
 		}
@@ -51,7 +58,7 @@ export const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
 									<ReviewForm
 										handleSubmit={addReview}
 										reviewText={reviewText}
-										labelText="Write a Review"
+										labelText="Post a Review"
 									/>
 								</Col>
 							</Row>
@@ -66,7 +73,7 @@ export const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
 						return (
 							<>
 								<Row>
-									<Col>{r.body}</Col>
+									<Col>{r?.comment}</Col>
 								</Row>
 								<Row>
 									<Col>

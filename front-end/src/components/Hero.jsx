@@ -7,17 +7,17 @@ import Button from "react-bootstrap/Button";
 import "../styles/Hero.css";
 
 const Hero = ({ movies }) => {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    const goToMovieReviews = (movieId) => {
-        navigate(`/reviews/${movieId}`);
-    }
+	const goToMovieReviews = (movieId) => {
+		navigate(`/reviews/${movieId}`);
+	};
 
 	return (
 		<div className="movie-carousel-container">
 			<Carousel>
-				{movies?.map((movie) => (
-					<Paper>
+				{movies?.map((movie) => {
+					return <Paper key={movie.imdbId}>
 						<div className="movie-card-container">
 							<div className="movie-card" style={{ "--img": `url(${movie.backdrops[5]})` }}>
 								<div className="movie-detail">
@@ -32,23 +32,28 @@ const Hero = ({ movies }) => {
 											<Link
 												to={`/trailer/${movie.trailerLink.substring(
 													movie.trailerLink.length - 11
-												)}`}    // get the last 11 characters on youtube video
+												)}`} // get the last 11 characters on youtube video
 											>
 												<FontAwesomeIcon
 													className="play-button-icon"
 													icon={faCirclePlay}
 												/>
 											</Link>
-                                            <div className="movie-review-button-container">
-                                                <Button variant="info" onClick={() => goToMovieReviews(movie.imdbId)}>Reviews</Button>
-                                            </div>
+											<div className="movie-review-button-container">
+												<Button
+													variant="info"
+													onClick={() => goToMovieReviews(movie.imdbId)}
+												>
+													Reviews
+												</Button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</Paper>
-				))}
+					</Paper>;
+				})}
 			</Carousel>
 		</div>
 	);
